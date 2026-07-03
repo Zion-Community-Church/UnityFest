@@ -91,6 +91,14 @@ textarea{resize:vertical;min-height:80px}
 .matrix-table td:first-child{text-align:left;font-weight:600;color:var(--navy)}
 .cell-cath{background:var(--navy)!important;color:#fff!important;font-weight:600}
 .cell-kec{background:var(--blue)!important;color:#fff!important;font-weight:600}
+.cell-cathedral{background:#3B0764!important;color:#fff!important;font-weight:600}
+.cell-kecoughtan{background:#7C3AED!important;color:#fff!important;font-weight:600}
+.cell-newbeg{background:#1565C0!important;color:#fff!important;font-weight:600}
+.cell-newport{background:#7B3F00!important;color:#fff!important;font-weight:600}
+.cell-hampton{background:#4CBB17!important;color:#1a1a1a!important;font-weight:600}
+.cell-ingleside{background:#E67E22!important;color:#1a1a1a!important;font-weight:600}
+.cell-norfolk{background:#C0392B!important;color:#fff!important;font-weight:600}
+.cell-franklin{background:#00897B!important;color:#fff!important;font-weight:600}
 .total-col{background:var(--gold-light)!important;font-weight:700;color:var(--navy)!important}
 .total-row td{background:var(--navy)!important;color:#fff!important;font-weight:700}
 
@@ -152,11 +160,31 @@ textarea{resize:vertical;min-height:80px}
 .matrix-tbl td{padding:9px 12px;border-bottom:1px solid var(--border);text-align:center}
 .matrix-tbl td:first-child{font-weight:600;color:var(--navy);text-align:left;border-right:2px solid var(--border)}
 .matrix-tbl tr:nth-child(even) td{background:#f8f9fd}
-.th-cath{background:var(--navy)!important}
-.th-kec{background:var(--blue)!important}
-.th-sm{background:#3d6ab0!important}
-.dc-cath{background:#1F3864!important;color:#fff!important;font-weight:600}
-.dc-kec{background:#2F5496!important;color:#fff!important;font-weight:600}
+.th-cathedral{background:#3B0764!important}
+.th-kecoughtan{background:#7C3AED!important}
+.th-newbeg{background:#1565C0!important}
+.th-newport{background:#7B3F00!important}
+.th-hampton{background:#4CBB17!important;color:#1a1a1a!important}
+.th-ingleside{background:#E67E22!important;color:#1a1a1a!important}
+.th-norfolk{background:#C0392B!important}
+.th-franklin{background:#00897B!important}
+.dc-cathedral{background:#3B0764!important;color:#fff!important;font-weight:600}
+.dc-kecoughtan{background:#7C3AED!important;color:#fff!important;font-weight:600}
+.dc-newbeg{background:#1565C0!important;color:#fff!important;font-weight:600}
+.dc-newport{background:#7B3F00!important;color:#fff!important;font-weight:600}
+.dc-hampton{background:#4CBB17!important;color:#1a1a1a!important;font-weight:600}
+.dc-ingleside{background:#E67E22!important;color:#1a1a1a!important;font-weight:600}
+.dc-norfolk{background:#C0392B!important;color:#fff!important;font-weight:600}
+.dc-franklin{background:#00897B!important;color:#fff!important;font-weight:600}
+/* Admin-only sections */
+.admin-section{display:none}
+.admin-section.visible{display:block}
+.admin-gate{background:#fff;border-radius:var(--radius);padding:14px 18px;box-shadow:0 2px 8px rgba(0,0,0,.07);display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.admin-gate label{font-size:.82rem;color:var(--muted);white-space:nowrap}
+.admin-gate input[type=password]{width:160px;padding:6px 10px;border:1.5px solid var(--border);border-radius:7px;font-size:.85rem}
+.admin-gate button{padding:7px 16px;background:var(--blue);color:#fff;border:none;border-radius:7px;font-size:.82rem;cursor:pointer;font-weight:600}
+.admin-gate button:hover{background:var(--navy)}
+.admin-gate .gate-status{font-size:.8rem;color:var(--green)}
 .dc-tot{background:var(--gold-light)!important;font-weight:700;color:var(--navy)!important}
 .d-total-row td{background:var(--navy)!important;color:#fff!important;font-weight:700;border-bottom:none}
 .signup-cell{display:flex;align-items:center;justify-content:center;gap:4px}
@@ -189,7 +217,7 @@ footer{text-align:center;padding:32px 0 20px;color:#888;font-size:.78rem}
   <button class="tab-btn" onclick="showTab('drinks')">🥤 Drinks</button>
   <button class="tab-btn" onclick="showTab('games')">🎮 Games</button>
   <button class="tab-btn" onclick="showTab('dj')">🎵 DJ / Music</button>
-  <button class="tab-btn" onclick="showTab('karaoke')">🎤 Karaoke</button>
+  <button class="tab-btn" onclick="showTab('karaoke')">🎤 Karaoke/Live Performance</button>
   <button class="tab-btn" onclick="showTab('basketball')">🏀 Basketball</button>
   <button class="tab-btn" onclick="showTab('kidgames')">👶 Kid Games</button>
   <button class="tab-btn" onclick="showTab('parking')">🅿️ Parking</button>
@@ -231,22 +259,34 @@ footer{text-align:center;padding:32px 0 20px;color:#888;font-size:.78rem}
     <div class="kpi"><div class="k-val">8</div><div class="k-label">Sites Participating</div><div class="k-sub">All converging at one venue</div></div>
     <div class="kpi"><div class="k-val">11</div><div class="k-label">Activities</div><div class="k-sub">Food · Drinks · Games · DJ · Karaoke · Basketball · Kids · Parking · Setup · Popcorn · Pretzels</div></div>
   </div>
-  <div class="sec-head">
-    <h3>📍 Site Progress</h3>
-    <div class="admin-toggle">
-      <input type="checkbox" id="adminToggle" onchange="toggleAdmin()">
-      <label for="adminToggle">Admin mode — edit signup counts</label>
+  <!-- Admin password gate -->
+  <div class="admin-gate">
+    <label>🔐 Coordinator Access:</label>
+    <input type="password" id="adminPassInput" placeholder="Enter access code" onkeydown="if(event.key==='Enter')checkAdmin()">
+    <button onclick="checkAdmin()">Unlock</button>
+    <span class="gate-status" id="adminStatus"></span>
+  </div>
+
+  <!-- Admin-only: Site Progress + Requirements Matrix -->
+  <div class="admin-section" id="adminSections">
+    <div class="sec-head">
+      <h3>📍 Site Progress</h3>
+      <div class="admin-toggle">
+        <input type="checkbox" id="adminToggle" onchange="toggleAdmin()">
+        <label for="adminToggle">Edit signup counts</label>
+      </div>
     </div>
+    <div class="site-grid" id="siteGrid"></div>
+    <div class="sec-head">
+      <h3>📋 Requirements Matrix</h3>
+      <small>Cathedral=12 food · 6 basketball/site · Drinks 5/2/1 · Parking/Kids/Setup 4-11/2/1</small>
+    </div>
+    <div class="table-wrap"><div class="tbl-scroll">
+      <table class="matrix-tbl"><thead id="dashHead"></thead><tbody id="dashBody"></tbody></table>
+    </div></div>
   </div>
-  <div class="site-grid" id="siteGrid"></div>
-  <div class="sec-head">
-    <h3>📋 Requirements Matrix</h3>
-    <small>Cathedral=12 food · 6 basketball/site · Drinks 5/2/1 · Parking/Kids/Setup 4-11/2/1</small>
-  </div>
-  <div class="table-wrap"><div class="tbl-scroll">
-    <table class="matrix-tbl"><thead id="dashHead"></thead><tbody id="dashBody"></tbody></table>
-  </div></div>
-  <div class="dash-footer">Last updated: <span id="lastUpdated"></span> · Set event date above to activate countdown · Admin mode saves to your browser</div>
+
+  <div class="dash-footer">Last updated: <span id="lastUpdated"></span> · Data refreshes every 60 seconds from Google Sheets</div>
 </div>
 
 <!-- QR Codes -->
@@ -258,21 +298,24 @@ footer{text-align:center;padding:32px 0 20px;color:#888;font-size:.78rem}
 
 </div><!-- /tab-home -->
 
-<!-- VOLUNTEER MATRIX (static) -->
+<!-- VOLUNTEER MATRIX (live counts) -->
 <div id="tab-matrix" class="form-panel">
-  <p class="section-title">Volunteer Requirements by Site</p>
-  <p class="section-sub">Required volunteer counts by site and activity</p>
+  <p class="section-title">Current Volunteers by Site</p>
+  <p class="section-sub">Current Volunteer Counts by Site and Activity</p>
   <div class="matrix-section">
     <table class="matrix-table">
       <thead>
         <tr>
           <th>Activity</th>
-          <th class="cell-cath">The Cathedral</th>
-          <th class="cell-kec">Kecoughtan Road</th>
-          <th>New Beginnings</th><th>Newport News</th>
-          <th>Downtown Hampton</th><th>Ingleside Road</th>
-          <th>Port Norfolk</th><th>Downtown Franklin</th>
-          <th class="total-col">TOTAL</th><th>Deadline</th>
+          <th class="cell-cathedral">The Cathedral</th>
+          <th class="cell-kecoughtan">Kecoughtan Road</th>
+          <th class="cell-newbeg">New Beginnings</th>
+          <th class="cell-newport">Newport News</th>
+          <th class="cell-hampton">Downtown Hampton</th>
+          <th class="cell-ingleside">Ingleside Road</th>
+          <th class="cell-norfolk">Port Norfolk</th>
+          <th class="cell-franklin">Downtown Franklin</th>
+          <th class="total-col">TOTAL</th>
         </tr>
       </thead>
       <tbody id="matrix-body"></tbody>
@@ -544,8 +587,8 @@ footer{text-align:center;padding:32px 0 20px;color:#888;font-size:.78rem}
 <div id="tab-karaoke" class="form-panel">
   <span class="back-link" onclick="showTab('home')">← Back to QR Codes</span>
   <div class="form-wrap">
-    <h2>🎤 Karaoke Signup <span class="req-badge med">2 wks out</span></h2>
-    <p class="form-desc">Ready to take the stage? Sign up as a solo act, duet, or group. Each site should have at least 2 singers!</p>
+    <h2>🎤 Karaoke / Live Performance Signup <span class="req-badge med">2 wks out</span></h2>
+    <p class="form-desc">Ready to take the stage? Sign up as a solo act, duet, or group. Each site should have at least 2 performers!</p>
     <iframe name="iframe-karaoke" style="display:none"></iframe>
     <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeVOH9ujoCx-vl6FtySwZvqu0m3OeZ9F2-wQOQujhqJohXl2A/formResponse" method="POST" target="iframe-karaoke" onsubmit="handleSubmit('karaoke',this)">
       <input type="hidden" name="fvv" value="1">
@@ -579,8 +622,16 @@ footer{text-align:center;padding:32px 0 20px;color:#888;font-size:.78rem}
         <label>Backup Song </label>
         <input type="text" name="entry.1179853006" placeholder="In case your first choice is taken (optional)" required>
       </div>
+      <div class="form-group">
+        <label>Performance Support Needs</label>
+        <div class="check-group">
+          <label><input type="checkbox" name="entry.support_accomp" value="Need Accompaniment"> Need Accompaniment (live musician to accompany you)</label>
+          <label><input type="checkbox" name="entry.support_own" value="Will Provide Own Music"> Will Provide Own Music (bring your own track/instrument)</label>
+          <label><input type="checkbox" name="entry.support_karaoke" value="Need Karaoke Track"> Need Karaoke Track (backing track provided by event)</label>
+        </div>
+      </div>
 <input type="hidden" name="entry.1991109045" value="">
-      <button type="submit" class="submit-btn">Submit Karaoke Signup</button>
+      <button type="submit" class="submit-btn">Submit Karaoke / Live Performance Signup</button>
     </form>
     <div class="success-msg" id="success-karaoke">✅ You're signed up! Your response has been recorded. We'll be in touch.</div>
 
@@ -1077,46 +1128,56 @@ QR_ACTS.forEach(act => {
   new QRCode(qi,{text:act.url,width:140,height:140,colorDark:'#1F3864',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
 });
 
-// ── Static matrix data
-const S_ACTS=[
-  {name:'Food (Servers)',   vals:[12,8,8,8,8,8,8,8],  dl:'3 wks'},
-  {name:'Drinks',           vals:[5,2,1,1,1,1,1,1],   dl:'3 wks'},
-  {name:'Games',            vals:[5,1,1,1,1,1,1,1],   dl:'2 wks'},
-  {name:'DJ / Music',       vals:[1,1,1,1,1,1,1,1],   dl:'2 wks'},
-  {name:'Karaoke',          vals:[1,1,1,1,1,1,1,1],   dl:'2 wks'},
-  {name:'Basketball',       vals:[6,6,6,6,6,6,6,6],   dl:'3 wks'},
-  {name:'Kid Games',        vals:[11,2,1,1,1,1,1,1],  dl:'2 wks'},
-  {name:'Parking',          vals:[4,2,1,1,1,1,1,1],   dl:'2 wks'},
-  {name:'Site Setup',       vals:[11,2,1,1,1,1,1,1],  dl:'2 wks'},
-  {name:'Popcorn Machine',  vals:[1,1,1,1,1,1,1,1],   dl:'2 wks'},
-  {name:'Pretzels',         vals:[1,1,1,1,1,1,1,1],   dl:'2 wks'},
-];
-(function(){
-  const tb=document.getElementById('matrix-body');
-  S_ACTS.forEach(a=>{
-    const tr=document.createElement('tr');
-    let t0=document.createElement('td');t0.textContent=a.name;tr.appendChild(t0);
-    let rt=0;
-    a.vals.forEach((v,i)=>{
-      rt+=v;const td=document.createElement('td');td.textContent=v;
-      if(i===0)td.className='cell-cath';else if(i===1)td.className='cell-kec';
-      tr.appendChild(td);
-    });
-    const tt=document.createElement('td');tt.textContent=rt;tt.className='total-col';tr.appendChild(tt);
-    const td2=document.createElement('td');td2.textContent=a.dl;tr.appendChild(td2);
-    tb.appendChild(tr);
-  });
-  const tr=document.createElement('tr');tr.className='total-row';
-  const t0=document.createElement('td');t0.textContent='SITE TOTAL';tr.appendChild(t0);
-  let grand=0;
-  for(let i=0;i<8;i++){
-    const st=S_ACTS.reduce((s,a)=>s+a.vals[i],0);grand+=st;
-    const td=document.createElement('td');td.textContent=st;tr.appendChild(td);
+// ── Admin password gate
+const ADMIN_CODE = 'unity2026';
+function checkAdmin(){
+  const val = document.getElementById('adminPassInput').value;
+  const status = document.getElementById('adminStatus');
+  if(val === ADMIN_CODE){
+    document.getElementById('adminSections').classList.add('visible');
+    status.textContent = '✅ Coordinator access granted';
+    document.getElementById('adminPassInput').value = '';
+    sessionStorage.setItem('admin_unlocked','1');
+  } else {
+    status.style.color='var(--red)';
+    status.textContent = '❌ Incorrect code';
+    setTimeout(()=>{status.textContent='';status.style.color='';},2000);
   }
-  const tg=document.createElement('td');tg.textContent=grand;tg.className='total-col';tr.appendChild(tg);
-  tr.appendChild(document.createElement('td'));
-  tb.appendChild(tr);
-})();
+}
+// Restore admin state if unlocked this session
+if(sessionStorage.getItem('admin_unlocked')==='1'){
+  document.getElementById('adminSections').classList.add('visible');
+  document.getElementById('adminStatus').textContent='✅ Coordinator access granted';
+}
+
+// ── Volunteer counts matrix (live, public-facing)
+function buildVolMatrix(){
+  const tb=document.getElementById('matrix-body');
+  if(!tb)return;
+  tb.innerHTML='';
+  D_ACTS.forEach(act=>{
+    const tr=document.createElement('tr');
+    let rh=`<td>${act.name}</td>`;
+    let total=0;
+    D_SITES.forEach(site=>{
+      const v=getV(act.id,site.key);
+      total+=v;
+      rh+=`<td class="dc-${site.cls}">${v}</td>`;
+    });
+    rh+=`<td class="total-col">${total}</td>`;
+    tr.innerHTML=rh;tb.appendChild(tr);
+  });
+  // Total row
+  const tr2=document.createElement('tr');tr2.className='total-row';
+  let rh2='<td>SITE TOTAL</td>';
+  let grand=0;
+  D_SITES.forEach(site=>{
+    const st=D_ACTS.reduce((s,a)=>s+getV(a.id,site.key),0);
+    grand+=st;rh2+=`<td>${st}</td>`;
+  });
+  rh2+=`<td class="total-col">${grand}</td>`;
+  tr2.innerHTML=rh2;tb.appendChild(tr2);
+}
 
 // ── Dashboard
 const D_SITES=[
@@ -1171,7 +1232,7 @@ function toggleAdmin(){
 function buildDash(){
   const head=document.getElementById('dashHead');
   let hr='<tr><th>Activity</th>';
-  D_SITES.forEach(s=>{const c=s.cls==='cathedral'?'th-cath':s.cls==='kecoughtan'?'th-kec':'th-sm';hr+=`<th class="${c}">${s.name.replace(' ','<br>')}</th>`;});
+  D_SITES.forEach(s=>{hr+=`<th class="th-${s.cls}">${s.name.replace(' ','<br>')}</th>`;});
   hr+='<th style="background:var(--gold);color:var(--navy)">TOTAL</th><th>Deadline</th></tr>';
   head.innerHTML=hr;
   const tb=document.getElementById('dashBody');tb.innerHTML='';
@@ -1182,7 +1243,7 @@ function buildDash(){
     D_SITES.forEach((site,si)=>{
       const r=getR(act,site);rt+=r;stot[si]+=r;
       const v=getV(act.id,site.key);
-      const cc=site.cls==='cathedral'?'dc-cath':site.cls==='kecoughtan'?'dc-kec':'';
+      const cc=`dc-${site.cls}`;
       rh+=`<td class="${cc}"><div class="signup-cell"><span class="req-n">${r}</span><input class="signup-input${adminMode?' show':''}" type="number" min="0" value="${v}" id="inp-${act.id}-${site.key}" onchange="chg('${act.id}','${site.key}',this.value)" title="Signed up (req: ${r})"></div></td>`;
     });
     grand+=rt;rh+=`<td class="dc-tot">${rt}</td><td style="white-space:nowrap;color:var(--muted)">${act.dl}</td>`;
@@ -1215,7 +1276,7 @@ function updateKPIs(){
   document.getElementById('kpi-signed').textContent=v;
   document.getElementById('kpi-gap').textContent=Math.max(0,r-v);
   document.getElementById('kpi-pct').textContent=r?Math.min(100,Math.round(v/r*100))+'%':'0%';
-  buildCards();
+  buildCards();buildVolMatrix();
   document.getElementById('lastUpdated').textContent=new Date().toLocaleString();
 }
 function chg(aId,sk,val){setV(aId,sk,val);updateKPIs();}
@@ -1241,41 +1302,4 @@ async function fetchLiveCounts() {
     svS(s);
     updateKPIs();
     document.getElementById('lastUpdated').textContent = new Date().toLocaleString() + ' (live)';
-  } catch(e) { console.warn('Live count fetch failed:', e); }
-}
-buildDash();buildCards();
-fetchLiveCounts();
-setInterval(fetchLiveCounts, 60000); // refresh every 60s
-document.getElementById('lastUpdated').textContent=new Date().toLocaleString();
-
-// ── Cancel form handling
-function toggleCancel(key) {
-  const cb  = document.getElementById('cancel-cb-'  + key);
-  const btn = document.getElementById('cancel-btn-' + key);
-  if (!cb || !btn) return;
-  btn.classList.toggle('visible', cb.checked);
-}
-
-function handleCancel(key, form) {
-  const cb    = document.getElementById('cancel-cb-' + key);
-  const email = document.getElementById('cancel-email-' + key);
-  if (!cb || !cb.checked) { alert('Please check the cancellation box to confirm.'); return; }
-  if (!email || !email.value) { alert('Please enter your email address.'); return; }
-
-  // POST cancellation directly to Apps Script Web App
-  if (WEB_APP_URL) {
-    const params = new URLSearchParams({activity: key, cancel: 'true', email: email.value});
-    fetch(WEB_APP_URL, {method:'POST', mode:'no-cors', body: params}).catch(()=>{});
-  }
-
-  setTimeout(() => {
-    document.getElementById('cancel-msg-' + key).style.display = 'block';
-    form.reset();
-    cb.checked = false;
-    document.getElementById('cancel-btn-' + key).classList.remove('visible');
-  }, 800);
-}
-
-</script>
-</body>
-</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+  } catch(e) { console.warn('Live count fetch fai
